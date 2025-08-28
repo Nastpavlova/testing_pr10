@@ -43,48 +43,50 @@ export const ArticleParamsForm = () => {
 						<Text as="h2" size={31} weight={800} uppercase>
 							задайте параметры
 						</Text>
-						
-						<Select 
-							selected={selectedFont} 
-							options={fontFamilyOptions} 
-							placeholder={selectedFont.value}
-							onChange={setSelectedFont} 
-							title="шрифт"
-						/>
 
-						<RadioGroup
-							name={selectedSizeFont.className}
-							options={fontSizeOptions}
-							selected={selectedSizeFont}
-							onChange={setSizeFont} 
-							title="размер шрифта"
-						/>
+						<div className={styles.section}>
+							<Select 
+								selected={selectedFont} 
+								options={fontFamilyOptions} 
+								placeholder={selectedFont.value}
+								onChange={setSelectedFont} 
+								title="шрифт"
+							/>
+						</div>
 
-						<Select 
-							selected={selectedFontColor} 
-							options={fontColors} 
-							placeholder={selectedFontColor.className}
-							onChange={setFontColor} 
-							title="цвет шрифта"
-						/>
+						<div className={styles.section}>
+							<Select 
+								selected={selectedFontColor} 
+								options={fontColors} 
+								placeholder={selectedFontColor.className}
+								onChange={setFontColor} 
+								title="цвет шрифта"
+							/>
+						</div>
 
-						<Separator />
+						<div className={styles.section}>
+							<Separator />
+						</div>
 
-						<Select 
-							selected={selectedBackgroundColor} 
-							options={backgroundColors} 
-							placeholder={selectedBackgroundColor.className}
-							onChange={setBackgroundColor}
-							title="цвет фона"
-						/>
+						<div className={styles.section}>
+							<Select 
+								selected={selectedBackgroundColor} 
+								options={backgroundColors} 
+								placeholder={selectedBackgroundColor.className}
+								onChange={setBackgroundColor}
+								title="цвет фона"
+							/>
+						</div>
 
-						<Select 
-							selected={selectedContentWidth} 
-							options={contentWidthArr} 
-							placeholder={selectedContentWidth.className}
-							onChange={setContentWidth}
-							title="ширина контента"
-						/>
+						<div className={styles.section}>
+							<Select 
+								selected={selectedContentWidth} 
+								options={contentWidthArr} 
+								placeholder={selectedContentWidth.className}
+								onChange={setContentWidth}
+								title="ширина контента"
+							/>
+						</div>
 
 						<div className={styles.bottomContainer}>
 							<Button title='Сбросить' htmlType='reset' type='clear' />
