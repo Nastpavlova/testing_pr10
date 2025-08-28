@@ -1,18 +1,17 @@
 import { ArrowButton } from 'src/ui/arrow-button';
 import { Button } from 'src/ui/button';
 import { useState } from 'react'
+
+import { fontFamilyOptions, fontSizeOptions, defaultArticleState, contentWidthArr, backgroundColors } from 'src/constants/articleProps';
+import { OptionType, fontColors } from 'src/constants/articleProps';
+
 import { Select } from '../../ui/select'
 import { RadioGroup } from '../../ui/radio-group'
-import { OptionType, fontColors } from 'src/constants/articleProps';
-import { fontFamilyOptions, fontSizeOptions, defaultArticleState } from 'src/constants/articleProps';
-import type { MouseEventHandler } from 'react';
+import { Separator } from '../../ui/separator'
+import { Text } from '../../ui/text'
 
 
 import styles from './ArticleParamsForm.module.scss';
-
-
- 
-
 
 export const ArticleParamsForm = () => {
 	const { 
@@ -23,26 +22,32 @@ export const ArticleParamsForm = () => {
 		fontSizeOption 
 	} = defaultArticleState
 
-	const [isOpenBar, setIsOpenBar] = useState<boolean>(false);
+	const [isOpenSideBar, setIsOpenSideBar] = useState<boolean>(false);
 
 	const [selectedFont, setSelectedFont] = useState<OptionType>(fontFamilyOption);
 	const [selectedSizeFont, setSizeFont] = useState<OptionType>(fontSizeOption);
 	const [selectedFontColor, setFontColor] = useState<OptionType>(fontColor);
+	const [selectedBackgroundColor, setBackgroundColor] = useState<OptionType>(backgroundColor);
+	const [selectedContentWidth, setContentWidth] = useState<OptionType>(contentWidth);
 
-	const toggleOpenBar = () => setIsOpenBar(prev => !prev);
+	const toggleOpenSideBar = () => setIsOpenSideBar(prev => !prev);
 
 	return (
 		<>
-			<ArrowButton isOpen={isOpenBar} onClick={toggleOpenBar} />
+			<ArrowButton isOpen={isOpenSideBar} onClick={toggleOpenSideBar} />
 
-			{isOpenBar && (
-				<aside className={`${styles.container} ${isOpenBar ? styles.container_open : ''} `}>
+			{isOpenSideBar && (
+				<aside className={`${styles.container} ${isOpenSideBar ? styles.container_open : ''} `}>
 					<form className={styles.form}>
 
+						<Text as="h2" size={31} weight={800} uppercase>
+							задайте параметры
+						</Text>
+						
 						<Select 
 							selected={selectedFont} 
 							options={fontFamilyOptions} 
-							placeholder={selectedFont.className}
+							placeholder={selectedFont.value}
 							onChange={setSelectedFont} 
 							title="шрифт"
 						/>
@@ -61,6 +66,24 @@ export const ArticleParamsForm = () => {
 							placeholder={selectedFontColor.className}
 							onChange={setFontColor} 
 							title="цвет шрифта"
+						/>
+
+						<Separator />
+
+						<Select 
+							selected={selectedBackgroundColor} 
+							options={backgroundColors} 
+							placeholder={selectedBackgroundColor.className}
+							onChange={setBackgroundColor}
+							title="цвет фона"
+						/>
+
+						<Select 
+							selected={selectedContentWidth} 
+							options={contentWidthArr} 
+							placeholder={selectedContentWidth.className}
+							onChange={setContentWidth}
+							title="ширина контента"
 						/>
 
 						<div className={styles.bottomContainer}>

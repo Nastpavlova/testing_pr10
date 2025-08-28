@@ -1,3 +1,4 @@
+// классы шрифтов
 export const fontFamilyClasses = [
 	'open-sans',
 	'ubuntu',
@@ -173,6 +174,7 @@ export const fontSizeOptions: OptionType[] = [
 	{ title: '38px', value: '38px', className: 'font-size-38' },
 ];
 
+// дефолтные значения
 export const defaultArticleState = {
 	fontFamilyOption: fontFamilyOptions[0],
 	fontColor: fontColors[0],
