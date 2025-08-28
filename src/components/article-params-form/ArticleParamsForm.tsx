@@ -1,10 +1,10 @@
-import { ArrowButton } from 'src/ui/arrow-button';
-import { Button } from 'src/ui/button';
 import { useState } from 'react'
 
 import { fontFamilyOptions, fontSizeOptions, defaultArticleState, contentWidthArr, backgroundColors } from 'src/constants/articleProps';
 import { OptionType, fontColors } from 'src/constants/articleProps';
 
+import { ArrowButton } from 'src/ui/arrow-button';
+import { Button } from 'src/ui/button';
 import { Select } from '../../ui/select'
 import { RadioGroup } from '../../ui/radio-group'
 import { Separator } from '../../ui/separator'
@@ -51,6 +51,16 @@ export const ArticleParamsForm = () => {
 								placeholder={selectedFont.value}
 								onChange={setSelectedFont} 
 								title="шрифт"
+							/>
+						</div>
+
+						<div className={styles.section}>
+							<RadioGroup
+								name={selectedSizeFont.className}
+								options={fontSizeOptions}
+								selected={selectedSizeFont}
+								onChange={setSizeFont} 
+								title="размер шрифта"
 							/>
 						</div>
 
