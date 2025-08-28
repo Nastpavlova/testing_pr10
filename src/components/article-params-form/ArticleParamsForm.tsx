@@ -2,8 +2,9 @@ import { ArrowButton } from 'src/ui/arrow-button';
 import { Button } from 'src/ui/button';
 import { useState } from 'react'
 import { Select } from '../../ui/select'
+import { RadioGroup } from '../../ui/radio-group'
 import { OptionType } from 'src/constants/articleProps';
-import { fontFamilyOptions, defaultArticleState } from 'src/constants/articleProps';
+import { fontFamilyOptions, fontSizeOptions, defaultArticleState } from 'src/constants/articleProps';
 import type { MouseEventHandler } from 'react';
 
 
@@ -24,9 +25,9 @@ export const ArticleParamsForm = () => {
 
 	const [isOpenBar, setIsOpenBar] = useState<boolean>(false);
 	const [selectedFont, setSelectedFont] = useState<OptionType | null>(fontFamilyOption);
+	const [selectedSizeFont, setSizeFont] = useState<OptionType>(fontSizeOption);
 
 	const toggleOpenBar = () => setIsOpenBar(prev => !prev);
-
 
 	return (
 		<>
@@ -41,7 +42,15 @@ export const ArticleParamsForm = () => {
 							options={fontFamilyOptions} 
 							placeholder={fontFamilyOptions[0].title}
 							onChange={setSelectedFont} 
-							title="Шрифт"
+							title="шрифт"
+						/>
+
+						<RadioGroup
+							name={selectedSizeFont.className}
+							options={fontSizeOptions}
+							selected={selectedSizeFont}
+							onChange={setSizeFont} 
+							title="размер шрифта"
 						/>
 
 						<div className={styles.bottomContainer}>
