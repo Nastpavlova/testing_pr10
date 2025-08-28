@@ -30,13 +30,19 @@ export const ArticleParamsForm = () => {
 
 	const toggleOpenSideBar = () => setIsOpenSideBar(prev => !prev);
 
+	// дописать чтобы при нажатии вне сайдбара, он закрывался
+
 	return (
 		<>
 			<ArrowButton isOpen={isOpenSideBar} onClick={toggleOpenSideBar} />
 
 			{isOpenSideBar && (
 				<aside className={`${styles.container} ${isOpenSideBar ? styles.container_open : ''} `}>
-					<form className={styles.form}>
+					<form 
+						className={styles.form}
+						// onSubmit={handleApply} дописать отправку формы
+						// onReset={handleReset}> дописать очистку формы
+					>
 
 						<Text as="h2" size={31} weight={800} uppercase>
 							задайте параметры
