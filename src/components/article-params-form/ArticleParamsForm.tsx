@@ -3,7 +3,7 @@ import { Button } from 'src/ui/button';
 import { useState } from 'react'
 import { Select } from '../../ui/select'
 import { RadioGroup } from '../../ui/radio-group'
-import { OptionType } from 'src/constants/articleProps';
+import { OptionType, fontColors } from 'src/constants/articleProps';
 import { fontFamilyOptions, fontSizeOptions, defaultArticleState } from 'src/constants/articleProps';
 import type { MouseEventHandler } from 'react';
 
@@ -24,8 +24,10 @@ export const ArticleParamsForm = () => {
 	} = defaultArticleState
 
 	const [isOpenBar, setIsOpenBar] = useState<boolean>(false);
-	const [selectedFont, setSelectedFont] = useState<OptionType | null>(fontFamilyOption);
+
+	const [selectedFont, setSelectedFont] = useState<OptionType>(fontFamilyOption);
 	const [selectedSizeFont, setSizeFont] = useState<OptionType>(fontSizeOption);
+	const [selectedFontColor, setFontColor] = useState<OptionType>(fontColor);
 
 	const toggleOpenBar = () => setIsOpenBar(prev => !prev);
 
@@ -40,7 +42,7 @@ export const ArticleParamsForm = () => {
 						<Select 
 							selected={selectedFont} 
 							options={fontFamilyOptions} 
-							placeholder={fontFamilyOptions[0].title}
+							placeholder={selectedFont.className}
 							onChange={setSelectedFont} 
 							title="шрифт"
 						/>
@@ -51,6 +53,14 @@ export const ArticleParamsForm = () => {
 							selected={selectedSizeFont}
 							onChange={setSizeFont} 
 							title="размер шрифта"
+						/>
+
+						<Select 
+							selected={selectedFontColor} 
+							options={fontColors} 
+							placeholder={selectedFontColor.className}
+							onChange={setFontColor} 
+							title="цвет шрифта"
 						/>
 
 						<div className={styles.bottomContainer}>
