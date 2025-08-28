@@ -9,10 +9,6 @@ export const ArticleParamsForm = () => {
 
 	const toggleOpenBar = () => setIsOpenBar(prev => !prev);
 
-	const moveSideBar = () => {
-		// lдобавить aside .container_open
-	}
-
 	return (
 		<>
 			<ArrowButton isOpen={isOpenBar} onClick={toggleOpenBar} />
