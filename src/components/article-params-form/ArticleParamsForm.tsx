@@ -1,7 +1,6 @@
 import { useState } from 'react'
 
-import { fontFamilyOptions, fontSizeOptions, defaultArticleState, contentWidthArr, backgroundColors } from 'src/constants/articleProps';
-import { OptionType, fontColors } from 'src/constants/articleProps';
+import { OptionType, fontColors, fontFamilyOptions, fontSizeOptions, defaultArticleState, contentWidthArr, backgroundColors } from 'src/constants/articleProps';
 
 import { ArrowButton } from 'src/ui/arrow-button';
 import { Button } from 'src/ui/button';
@@ -9,7 +8,6 @@ import { Select } from '../../ui/select'
 import { RadioGroup } from '../../ui/radio-group'
 import { Separator } from '../../ui/separator'
 import { Text } from '../../ui/text'
-
 
 import styles from './ArticleParamsForm.module.scss';
 
