@@ -1,6 +1,15 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 
-import { OptionType, fontColors, fontFamilyOptions, fontSizeOptions, defaultArticleState, contentWidthArr, backgroundColors } from 'src/constants/articleProps';
+import { 
+	OptionType, 
+	fontColors, 
+	fontFamilyOptions, 
+	fontSizeOptions, 
+	defaultArticleState, 
+	contentWidthArr, 
+	backgroundColors,
+	ArticleStateType
+} from 'src/constants/articleProps';
 
 import { ArrowButton } from 'src/ui/arrow-button';
 import { Button } from 'src/ui/button';
@@ -11,7 +20,11 @@ import { Text } from '../../ui/text'
 
 import styles from './ArticleParamsForm.module.scss';
 
-export const ArticleParamsForm = () => {
+type ArticleParamsFormProps = {
+	onApply: (options: ArticleStateType) => void;
+}
+
+export const ArticleParamsForm = ({onApply}: ArticleParamsFormProps) => {
 	const { 
 		fontFamilyOption, 
 		fontColor, 
@@ -30,6 +43,34 @@ export const ArticleParamsForm = () => {
 
 	const toggleOpenSideBar = () => setIsOpenSideBar(prev => !prev);
 
+	function handleApply(event: React.FormEvent<HTMLFormElement> ) {
+		event.preventDefault();
+
+		const selectedArticleOptions: ArticleStateType  = {
+			fontFamilyOption: selectedFont,
+			fontColor: selectedFontColor,
+			backgroundColor: selectedBackgroundColor,
+			contentWidth: selectedContentWidth,
+			fontSizeOption: selectedSizeFont
+		}
+
+		onApply(selectedArticleOptions);
+		setIsOpenSideBar(!isOpenSideBar);
+	}
+
+	function handleReset(event: React.FormEvent<HTMLFormElement>) {
+		event.preventDefault();
+
+		setSelectedFont(fontFamilyOption);
+		setSizeFont(fontSizeOption);
+		setFontColor(fontColor);
+		setBackgroundColor(backgroundColor);
+		setContentWidth(contentWidth);
+
+		onApply(defaultArticleState);
+		setIsOpenSideBar(!isOpenSideBar);
+	}
+
 	// дописать чтобы при нажатии вне сайдбара, он закрывался
 
 	return (
@@ -40,8 +81,8 @@ export const ArticleParamsForm = () => {
 				<aside className={`${styles.container} ${isOpenSideBar ? styles.container_open : ''} `}>
 					<form 
 						className={styles.form}
-						// onSubmit={handleApply} дописать отправку формы
-						// onReset={handleReset}> дописать очистку формы
+						onSubmit={handleApply}
+						onReset={handleReset}
 					>
 
 						<Text as="h2" size={31} weight={800} uppercase>
@@ -103,8 +144,8 @@ export const ArticleParamsForm = () => {
 						</div>
 
 						<div className={styles.bottomContainer}>
-							<Button title='Сбросить' htmlType='reset' type='clear' />
-							<Button title='Применить' htmlType='submit' type='apply' />
+							<Button title='сбросить' htmlType='reset' type='clear' />
+							<Button title='применить' htmlType='submit' type='apply' />
 						</div>
 					</form>
 				</aside>
