@@ -1,18 +1,26 @@
+// изменила overflow scroll на auto
 .container {
 	position: fixed;
 	left: 0;
 	width: 616px;
 	height: 100%;
-	overflow: scroll;
+	overflow: auto;
 	transform: translate(-616px);
 	transition: transform 0.5s ease;
+	z-index: 2;
 }
 
 .container_open {
 	transform: translate(0);
 }
 
-// добавлен gap
+.overlay {
+	position: fixed;
+	inset: 0;
+	z-index: 0;
+}
+
+// добавлен gap, чтобы было как в макете 
 .form {
 	display: flex;
 	flex-shrink: 0;
@@ -33,6 +41,7 @@
 	margin-top: auto;
 }
 
+// добавлен section, чтобы было как в макете 
 .section {
 	display: flex;
 	flex-direction: column;

@@ -28,7 +28,7 @@ export const ArticleParamsForm = ({onApply}: ArticleParamsFormProps) => {
 	const { 
 		fontFamilyOption, 
 		fontColor, 
-		backgroundColor, 
+		backgroundColor,
 		contentWidth, 
 		fontSizeOption 
 	} = defaultArticleState
@@ -71,84 +71,94 @@ export const ArticleParamsForm = ({onApply}: ArticleParamsFormProps) => {
 		setIsOpenSideBar(!isOpenSideBar);
 	}
 
-	// дописать чтобы при нажатии вне сайдбара, он закрывался
+	const handleOverlayClick = (event: React.MouseEvent) => {
+		if (event.target === event.currentTarget) {
+			setIsOpenSideBar(false);
+		}
+	};
+
+	const handleFormClick = (event: React.MouseEvent) => {
+		event.stopPropagation();
+	};
 
 	return (
 		<>
 			<ArrowButton isOpen={isOpenSideBar} onClick={toggleOpenSideBar} />
 
 			{isOpenSideBar && (
-				<aside className={`${styles.container} ${isOpenSideBar ? styles.container_open : ''} `}>
-					<form 
-						className={styles.form}
-						onSubmit={handleApply}
-						onReset={handleReset}
-					>
+				<div className={styles.overlay} onClick={handleOverlayClick}>
+					<aside className={`${styles.container} ${isOpenSideBar ? styles.container_open : ''} `}>
+						<form 
+							className={styles.form}
+							onClick={handleFormClick}
+							onSubmit={handleApply}
+							onReset={handleReset}
+						>
+							<Text as="h2" size={31} weight={800} uppercase>
+								задайте параметры
+							</Text>
 
-						<Text as="h2" size={31} weight={800} uppercase>
-							задайте параметры
-						</Text>
+							<div className={styles.section}>
+								<Select 
+									selected={selectedFont} 
+									options={fontFamilyOptions} 
+									placeholder={selectedFont.value}
+									onChange={setSelectedFont} 
+									title="шрифт"
+								/>
+							</div>
 
-						<div className={styles.section}>
-							<Select 
-								selected={selectedFont} 
-								options={fontFamilyOptions} 
-								placeholder={selectedFont.value}
-								onChange={setSelectedFont} 
-								title="шрифт"
-							/>
-						</div>
+							<div className={styles.section}>
+								<RadioGroup
+									name={selectedSizeFont.className}
+									options={fontSizeOptions}
+									selected={selectedSizeFont}
+									onChange={setSizeFont} 
+									title="размер шрифта"
+								/>
+							</div>
 
-						<div className={styles.section}>
-							<RadioGroup
-								name={selectedSizeFont.className}
-								options={fontSizeOptions}
-								selected={selectedSizeFont}
-								onChange={setSizeFont} 
-								title="размер шрифта"
-							/>
-						</div>
+							<div className={styles.section}>
+								<Select 
+									selected={selectedFontColor} 
+									options={fontColors} 
+									placeholder={selectedFontColor.className}
+									onChange={setFontColor} 
+									title="цвет шрифта"
+								/>
+							</div>
 
-						<div className={styles.section}>
-							<Select 
-								selected={selectedFontColor} 
-								options={fontColors} 
-								placeholder={selectedFontColor.className}
-								onChange={setFontColor} 
-								title="цвет шрифта"
-							/>
-						</div>
+							<div className={styles.section}>
+								<Separator />
+							</div>
 
-						<div className={styles.section}>
-							<Separator />
-						</div>
+							<div className={styles.section}>
+								<Select 
+									selected={selectedBackgroundColor} 
+									options={backgroundColors} 
+									placeholder={selectedBackgroundColor.className}
+									onChange={setBackgroundColor}
+									title="цвет фона"
+								/>
+							</div>
 
-						<div className={styles.section}>
-							<Select 
-								selected={selectedBackgroundColor} 
-								options={backgroundColors} 
-								placeholder={selectedBackgroundColor.className}
-								onChange={setBackgroundColor}
-								title="цвет фона"
-							/>
-						</div>
+							<div className={styles.section}>
+								<Select 
+									selected={selectedContentWidth} 
+									options={contentWidthArr} 
+									placeholder={selectedContentWidth.className}
+									onChange={setContentWidth}
+									title="ширина контента"
+								/>
+							</div>
 
-						<div className={styles.section}>
-							<Select 
-								selected={selectedContentWidth} 
-								options={contentWidthArr} 
-								placeholder={selectedContentWidth.className}
-								onChange={setContentWidth}
-								title="ширина контента"
-							/>
-						</div>
-
-						<div className={styles.bottomContainer}>
-							<Button title='сбросить' htmlType='reset' type='clear' />
-							<Button title='применить' htmlType='submit' type='apply' />
-						</div>
-					</form>
-				</aside>
+							<div className={styles.bottomContainer}>
+								<Button title='сбросить' htmlType='reset' type='clear' />
+								<Button title='применить' htmlType='submit' type='apply' />
+							</div>
+						</form>
+					</aside>
+				</div>
 			)}
 		</>
 	);
